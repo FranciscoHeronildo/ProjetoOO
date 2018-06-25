@@ -73,12 +73,27 @@ public class Principal {
 
 	private static Categoria cadastrarCategoria() {
 		Categoria categoria;
-		//do {
+
 		String descricao = JOptionPane.showInputDialog("Categoria");
-		categoria = new Categoria(descricao);
-		//}while(JOptionPane.showConfirmDialog(null, "Deseja cadastrar uma nova categoria?") == JOptionPane.YES_OPTION);
+		
+		SubCategoria subCategoria = cadastrarSubCategoria();
+		
+		categoria = new Categoria(descricao, subCategoria);
+
 		return categoria;
 	}
+
+	private static SubCategoria cadastrarSubCategoria() {
+		SubCategoria subCategoria = null;
+		String descricao;
+		
+		while(JOptionPane.showConfirmDialog(null, "Deseja cadastrar uma subcategoria?") == JOptionPane.YES_OPTION) {
+			descricao = JOptionPane.showInputDialog("Subcategoria");
+			subCategoria = new SubCategoria(descricao);
+		}
+		return subCategoria;
+	}
+	
 	
 	
 	
