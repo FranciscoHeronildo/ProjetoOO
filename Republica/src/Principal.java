@@ -7,7 +7,11 @@ public class Principal {
 		String[] menu = {
 				"-- Selecione uma opcao --",
 				"Cadastrar Estudante",
+				"Pesquisar Estudante",
+				"Deletar Estudante",
 				"Cadastrar Despesas",
+				"Deletar Despesas",
+				"Calcular Despesas",
 				"Sair"};
 		String opcaoPadrao = menu[0];
 		Object opcaoSelecionada = null;
@@ -16,7 +20,7 @@ public class Principal {
 			opcaoSelecionada = JOptionPane.showInputDialog(
 					null,
 					"Selecione",
-					"teste",
+					"Republica",
 					JOptionPane.QUESTION_MESSAGE,
 					null,
 					menu,
@@ -29,18 +33,73 @@ public class Principal {
 			case "Cadastrar Despesas":
 				cadastrarDespesa();
 				break;
+			case "Calcular Despesas":
+				calcularDespesas();
+				break;
+				
 			case "Sair":
 				break;
 				
 			default:
+				JOptionPane.showMessageDialog(null, "Escolha uma opcao válida");
 				break;
 			}
 			
-			
-			
-			
-		}while(!((String)opcaoSelecionada).equals((String)menu[3]));
+
+		}while(!((String)opcaoSelecionada).equals((String)"Sair"));
 		
+	}
+
+	private static void calcularDespesas() {
+		String[] menuDespesa = {
+				"-- Selecione uma opcao --",
+				"Regra Igualitaria",
+				"Regra Proporcional",
+				"Voltar"};
+		String opcaoPadraoDespesa = menuDespesa[0];
+		Object opcaoSelecionadaDespesa = null;
+		
+		do {
+			opcaoSelecionadaDespesa = JOptionPane.showInputDialog(
+					null,
+					"Selecione a regra de calculo",
+					"Republica",
+					JOptionPane.QUESTION_MESSAGE,
+					null,
+					menuDespesa,
+					opcaoPadraoDespesa);
+			
+			switch((String) opcaoSelecionadaDespesa) {
+			case "Regra Igualitaria":
+				calcularRegraIgualitaria();
+				break;
+			case "Regra Proporcional":
+				calcularRegraProporcional();
+				break;
+			case "Voltar":
+				break;
+				
+			case "Sair":
+				break;
+				
+			default:
+				JOptionPane.showMessageDialog(null, "Escolha uma opcao válida");
+				break;
+			}
+			
+
+		}while(!((String)opcaoSelecionadaDespesa).equals((String)"Voltar"));
+		
+	}
+
+	private static void calcularRegraProporcional() {
+		RegraProporcional.calcularRegraProporcional();
+		JOptionPane.showMessageDialog(null, RegraProporcional.message);
+	}
+
+	private static void calcularRegraIgualitaria() {
+		float regraIgualitaria = RegraIgualitaria.calcularRegraIgualitaria();
+		JOptionPane.showMessageDialog(null, "Despesas mensais para cada estudante morador R$ " + regraIgualitaria);
 	}
 
 	private static void cadastrarEstudante() {
@@ -87,7 +146,7 @@ public class Principal {
 		SubCategoria subCategoria = null;
 		String descricao;
 		
-		while(JOptionPane.showConfirmDialog(null, "Deseja cadastrar uma subcategoria?") == JOptionPane.YES_OPTION) {
+		if(JOptionPane.showConfirmDialog(null, "Deseja cadastrar uma subcategoria?") == JOptionPane.YES_OPTION) {
 			descricao = JOptionPane.showInputDialog("Subcategoria");
 			subCategoria = new SubCategoria(descricao);
 		}

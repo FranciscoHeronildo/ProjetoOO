@@ -6,8 +6,6 @@ public class Despesa {
 	float valor;
 	Categoria categoria;
 	
-	
-	
 	public Despesa(String descricao, Categoria categoria, float valor) {
 		this.descricao = descricao;
 		this.valor = valor;
@@ -23,5 +21,9 @@ public class Despesa {
 	public boolean cadastrarCategoria(Categoria c) {
 		boolean resposta = cat.add(c);
 		return resposta;
+	}
+
+	public float getValor() {
+		return valor;
 	}
 }

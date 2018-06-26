@@ -4,8 +4,8 @@ import java.util.List;
 public class Republica {
 	
 	
-	List<Estudante> est;
-	List<Despesa> des;
+	static List<Estudante> est;
+	static List<Despesa> des;
 	
 	public Republica() {
 		est = new LinkedList<Estudante>();
