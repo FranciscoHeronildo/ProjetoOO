@@ -6,6 +6,14 @@ public class Despesa {
 	float valor;
 	Categoria categoria;
 	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
 	public Despesa(String descricao, Categoria categoria, float valor) {
 		this.descricao = descricao;
 		this.valor = valor;

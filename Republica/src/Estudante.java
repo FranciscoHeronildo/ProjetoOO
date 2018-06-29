@@ -14,6 +14,10 @@ public class Estudante {
 		return rendimentos;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	public String getNome() {
 		return nome;
 	}

@@ -10,6 +10,7 @@ public class Principal {
 				"Pesquisar Estudante",
 				"Deletar Estudante",
 				"Cadastrar Despesas",
+				"Pesquisar Despesas",
 				"Deletar Despesas",
 				"Calcular Despesas",
 				"Sair"};
@@ -30,24 +31,112 @@ public class Principal {
 			case "Cadastrar Estudante":
 				cadastrarEstudante();
 				break;
+			case "Pesquisar Estudante":
+				pesquisarEstudante();
+				break;
+			case "Deletar Estudante":
+				deletarEstudante();
+				break;
 			case "Cadastrar Despesas":
 				cadastrarDespesa();
 				break;
 			case "Calcular Despesas":
 				calcularDespesas();
 				break;
+			case "Pesquisar Despesas":
+				pesquisarDespesas();
+				break;
+			case "Deletar Despesas":
+				deletarDespesas();
+				break;
 				
 			case "Sair":
 				break;
 				
 			default:
-				JOptionPane.showMessageDialog(null, "Escolha uma opcao válida");
+				JOptionPane.showMessageDialog(null, "Escolha uma opcao valida");
 				break;
 			}
 			
 
 		}while(!((String)opcaoSelecionada).equals((String)"Sair"));
 		
+	}
+
+	private static void deletarDespesas() {
+		Despesa d = pesquisarDespesas();
+		if(d == null)
+			return;
+		
+		int escolha = JOptionPane.showConfirmDialog(null, "Deseja mesmo deletar a despesa?",
+				"Deletar",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
+		
+		if(escolha == JOptionPane.YES_OPTION) {
+			boolean deletado = rep.deletarDespesa(d);
+			if(deletado)
+				JOptionPane.showMessageDialog(null, "Despesa deletada!");
+			else
+				JOptionPane.showMessageDialog(null, "Despesa nao deletado!");
+		}
+		
+	}
+
+	private static Despesa pesquisarDespesas() {
+		String pesquisa = JOptionPane.showInputDialog("Digite a descricao da despesa");
+		Despesa d = rep.pesquisarDespesa(pesquisa);
+		if(d == null) {
+			JOptionPane.showMessageDialog(null, "Despesa nao encontrada!");
+		}else {
+			JOptionPane.showMessageDialog(null, "Despesa encontrada");
+			String aux;
+			if(d.getCategoria().getSubCategoria() != null)
+				aux = "SubCategoria = " + d.getCategoria().getSubCategoria().getDescricao() + "\n";
+			else
+				aux = "";
+			JOptionPane.showMessageDialog(null, 
+					"Nome: " + d.getDescricao() + "\n" + 
+					"Categoria: " + d.getCategoria().getDescricao() + "\n" + aux +
+					"Valor: " + d.getValor());
+		}
+		return d;
+		
+	}
+
+	private static void deletarEstudante() {
+		Estudante e = pesquisarEstudante();
+		if(e == null)
+			return;
+		
+		int escolha = JOptionPane.showConfirmDialog(null, "Deseja mesmo deletar o estudante?",
+				"Deletar",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
+		
+		if(escolha == JOptionPane.YES_OPTION) {
+			boolean deletado = rep.deletarEstudante(e);
+			if(deletado)
+				JOptionPane.showMessageDialog(null, "Estudante deletado");
+			else
+				JOptionPane.showMessageDialog(null, "Estudante nao deletado!");
+		}
+		
+	}
+
+	private static Estudante pesquisarEstudante() {
+		String pesquisa = JOptionPane.showInputDialog("Digite o nome a ser pesquisado");
+		Estudante e = rep.pesquisarEstudante(pesquisa);
+		if(e == null) {
+			JOptionPane.showMessageDialog(null, "Estudante nao encontrado!");
+		}else {
+			JOptionPane.showMessageDialog(null, "Estudante encontrado");
+			JOptionPane.showMessageDialog(null, 
+					"Nome: " + e.getNome() + "\n" + 
+					"Email: " + e.getEmail() + "\n" +
+					"Rendimentos: " + e.getRendimentos());
+		}
+		return e;
 	}
 
 	private static void calcularDespesas() {

@@ -18,7 +18,7 @@ public class RegraProporcional extends Republica{
 		while(iteradorEstudantes.hasNext()) {
 			
 			float rendimento =  iteradorEstudantes.next().getRendimentos();
-			//String nome =  iteradorEstudantes.getNome().;
+			//String nome =  iteradorEstudantes.getNome();
 			mediaRegraProporcional = (rendimento * 100f) / totalDespesas;
 			
 			message += "Estudante: " + //nome + 

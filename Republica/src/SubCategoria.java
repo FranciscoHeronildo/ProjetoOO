@@ -5,4 +5,8 @@ public class SubCategoria {
 	public SubCategoria(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public String getDescricao() {
+		return descricao;
+	}
 }

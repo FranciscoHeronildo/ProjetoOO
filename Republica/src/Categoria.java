@@ -10,6 +10,14 @@ public class Categoria {
 		this.subCategoria = subCategoria;
 	}
 	
+	public SubCategoria getSubCategoria() {
+		return subCategoria;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
 	List<SubCategoria> subcat;
 	
 	public Categoria() {
