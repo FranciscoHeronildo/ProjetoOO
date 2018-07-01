@@ -22,4 +22,13 @@ public class Estudante {
 		return nome;
 	}
 	
+	public String toString() {
+		String resposta = "";
+		resposta += "Nome: " + nome +'\n';
+		resposta += "Email: " + email +'\n';
+		resposta += "Rendimento: R$ " + rendimentos +'\n';
+		
+		return resposta;
+	}
+	
 }

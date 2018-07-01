@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 import javax.swing.JOptionPane;
 
 public class Principal {
@@ -13,6 +15,8 @@ public class Principal {
 				"Pesquisar Despesas",
 				"Deletar Despesas",
 				"Calcular Despesas",
+				"Gravar Estudantes em Arquivo",
+				"Ler Estudantes de Arquivo",
 				"Sair"};
 		String opcaoPadrao = menu[0];
 		Object opcaoSelecionada = null;
@@ -49,7 +53,12 @@ public class Principal {
 			case "Deletar Despesas":
 				deletarDespesas();
 				break;
-				
+			case "Gravar Estudantes em Arquivo":
+				gravarEstudanteEmArquivo();
+				break;
+			case "Ler Estudantes de Arquivo":
+				LerEstudantesDeArquivo();
+				break;
 			case "Sair":
 				break;
 				
@@ -61,6 +70,21 @@ public class Principal {
 
 		}while(!((String)opcaoSelecionada).equals((String)"Sair"));
 		
+	}
+
+
+	private static void LerEstudantesDeArquivo() {
+		boolean resposta;
+		resposta = rep.lerEstudantesDeArquivo();
+		if(resposta)
+			JOptionPane.showMessageDialog(null, "Estudantes carregados com sucesso");
+		
+	}
+
+	private static void gravarEstudanteEmArquivo() {
+		boolean resposta = rep.gravarEstudanteEmArquivo();
+		if(resposta)
+			JOptionPane.showMessageDialog(null, "Estudantes gravados com sucesso");
 	}
 
 	private static void deletarDespesas() {
@@ -183,18 +207,21 @@ public class Principal {
 
 	private static void calcularRegraProporcional() {
 		RegraProporcional.calcularRegraProporcional();
-		JOptionPane.showMessageDialog(null, RegraProporcional.message);
+
+		JOptionPane.showMessageDialog(null, RegraProporcional.getMessage());
 	}
 
 	private static void calcularRegraIgualitaria() {
 		float regraIgualitaria = RegraIgualitaria.calcularRegraIgualitaria();
-		JOptionPane.showMessageDialog(null, "Despesas mensais para cada estudante morador R$ " + regraIgualitaria);
+		DecimalFormat df = new DecimalFormat(",##0.##");
+		JOptionPane.showMessageDialog(null, "Despesas mensais para cada estudante morador R$ " + df.format(regraIgualitaria));
 	}
 
 	private static void cadastrarEstudante() {
 		do {
 			String nome = JOptionPane.showInputDialog("Nome do estudante:");
 			String email = JOptionPane.showInputDialog("Email:");
+			
 			float rendimentos = Float.parseFloat(JOptionPane.showInputDialog("Rendimentos:"));
 			
 			Estudante est = new Estudante(nome, email, rendimentos);
@@ -207,7 +234,10 @@ public class Principal {
 	private static void cadastrarDespesa() {
 		do {
 			String descricao = JOptionPane.showInputDialog("Despesa");
+			
+			
 			Float valor = Float.parseFloat(JOptionPane.showInputDialog("Valor"));
+			
 			Categoria categoria = cadastrarCategoria();
 			
 			

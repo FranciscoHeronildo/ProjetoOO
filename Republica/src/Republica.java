@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -62,6 +68,90 @@ public class Republica {
 		boolean resposta = false;
 		if(des.contains(d))
 			resposta = des.remove(d);
+		return resposta;
+	}
+
+	public boolean gravarEstudanteEmArquivo() {
+		boolean resposta = false;
+		
+		FileWriter arquivo = null;
+		
+		try {
+			arquivo = new FileWriter("alunos.txt");
+		} catch (IOException v) {
+			v.printStackTrace();
+		}
+		
+		BufferedWriter buffer = new BufferedWriter(arquivo);
+		
+		Iterator<Estudante> iteradorEstudante = est.iterator();
+		while(iteradorEstudante.hasNext()) {
+			Estudante e = iteradorEstudante.next();
+			String str = "";
+			
+			str += e.getNome() + ";";
+			str += e.getEmail() + ";";
+			str += e.getRendimentos() + ";";
+			
+			try {
+				buffer.write(str);
+				buffer.newLine();
+			} catch (IOException v) {
+				v.printStackTrace();
+			}
+		}
+		
+		try {
+			buffer.close();
+			resposta = true;
+		} catch (IOException v) {
+			v.printStackTrace();
+		}
+		
+		return resposta;
+	}
+
+	public boolean lerEstudantesDeArquivo() {
+		FileReader arquivo = null;
+		BufferedReader buffer;
+		boolean resposta; 
+		
+		try {
+			arquivo = new FileReader("alunos.txt");
+		} catch (FileNotFoundException v) {
+			v.printStackTrace();
+		}
+		buffer = new BufferedReader(arquivo);
+		
+		
+		String line = "";
+		try {
+			line = buffer.readLine();
+		} catch (IOException v) {
+			v.printStackTrace();
+		}
+		
+		
+		do {
+			String[] campos = line.split(";");
+			
+			float rendimento = Float.parseFloat(campos[2]);
+			
+			Estudante estudante = new Estudante(campos[0], campos[1], rendimento);
+			
+			if (est == null) 
+				est = new LinkedList<Estudante>();
+			
+			resposta = est.add(estudante);
+			
+			try {
+				line = buffer.readLine();
+			} catch (IOException v) {
+				v.printStackTrace();
+			}
+			
+		} while (line != null);
+		
 		return resposta;
 	}
 	
