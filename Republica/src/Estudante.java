@@ -18,6 +18,18 @@ public class Estudante {
 		return email;
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setRendimentos(float rendimentos) {
+		this.rendimentos = rendimentos;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -30,5 +42,5 @@ public class Estudante {
 		
 		return resposta;
 	}
-	
+
 }

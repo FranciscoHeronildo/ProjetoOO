@@ -19,8 +19,13 @@ public class Republica {
 		des = new LinkedList<Despesa>();
 	}
 	
-	public boolean cadastrarEstudante(Estudante a) {
-		boolean resposta = est.add(a);
+	public boolean cadastrarEstudante(Estudante a) throws NumberFormatException, NumeroInvalidoException {
+		boolean resposta = false;
+		
+		if(a.getRendimentos() <= 0) {
+			throw new NumeroInvalidoException(a.getRendimentos());
+		}
+		resposta = est.add(a);
 		return resposta;
 	}
 	

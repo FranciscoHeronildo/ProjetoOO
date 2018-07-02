@@ -222,14 +222,44 @@ public class Principal {
 			String nome = JOptionPane.showInputDialog("Nome do estudante:");
 			String email = JOptionPane.showInputDialog("Email:");
 			
-			float rendimentos = Float.parseFloat(JOptionPane.showInputDialog("Rendimentos:"));
+			float rendimentos = 0;
+			boolean resposta = true;
+			do {
+				try {
+					rendimentos = Float.parseFloat(JOptionPane.showInputDialog("Rendimentos:"));
+					resposta = false;
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
+					resposta = true;
+				}
+			} while(resposta);
 			
 			Estudante est = new Estudante(nome, email, rendimentos);
 			
-			rep.cadastrarEstudante(est);
+			resposta = true;
+			do {
+				try {
+					rep.cadastrarEstudante(est);
+					resposta = false;
+				} catch (NumeroInvalidoException | NumberFormatException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+					try {
+						rendimentos = Float.parseFloat(JOptionPane.showInputDialog("Rendimentos:"));
+						resposta = false;
+					} catch (NumberFormatException e1) {
+						JOptionPane.showMessageDialog(null, "Erro: " + e1.getMessage());
+						resposta = true;
+					}
+					est.setRendimentos(rendimentos);
+					resposta = true;
+				}
+			} while(resposta);
+
 		} while (JOptionPane.showConfirmDialog(null, "Deseja cadastrar um novo estudante?") == JOptionPane.YES_OPTION);
 		
 	}
+	
+	
 	
 	private static void cadastrarDespesa() {
 		do {
