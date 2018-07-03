@@ -3,19 +3,19 @@ import java.text.DecimalFormat;
 
 import javax.swing.JOptionPane;
 
-import Aplicação.Republica;
-import Cadastro.Categoria;
-import Cadastro.Despesa;
-import Cadastro.Estudante;
-import Cadastro.SubCategoria;
-import Calculo.RegraIgualitaria;
-import Calculo.RegraProporcional;
-import Exceptions.CategoriaNaoInformadaException;
-import Exceptions.DescricaoNaoInformadaException;
-import Exceptions.EmailNaoInformadoException;
-import Exceptions.NomeNaoInformadoException;
-import Exceptions.NumeroInvalidoException;
-import Exceptions.ValorNaoInformadoException;
+import aplicacao.Republica;
+import cadastro.Categoria;
+import cadastro.Despesa;
+import cadastro.Estudante;
+import cadastro.SubCategoria;
+import calculo.RegraIgualitaria;
+import calculo.RegraProporcional;
+import exceptions.CategoriaNaoInformadaException;
+import exceptions.DescricaoNaoInformadaException;
+import exceptions.EmailNaoInformadoException;
+import exceptions.NomeNaoInformadoException;
+import exceptions.NumeroInvalidoException;
+import exceptions.ValorNaoInformadoException;
 
 public class Principal {
 	static Republica rep = new Republica();
@@ -26,9 +26,11 @@ public class Principal {
 				"Cadastrar Estudante",
 				"Pesquisar Estudante",
 				"Deletar Estudante",
+				"Lista de Estudantes",
 				"Cadastrar Despesas",
 				"Pesquisar Despesas",
 				"Deletar Despesas",
+				"Lista de Despesas",
 				"Calcular Despesas",
 				"Gravar Estudantes em Arquivo",
 				"Ler Estudantes de Arquivo",
@@ -56,6 +58,9 @@ public class Principal {
 			case "Deletar Estudante":
 				deletarEstudante();
 				break;
+			case "Lista de Estudantes":
+				listarEstudantes();
+				break;
 			case "Cadastrar Despesas":
 				cadastrarDespesa();
 				break;
@@ -64,6 +69,9 @@ public class Principal {
 				break;
 			case "Pesquisar Despesas":
 				pesquisarDespesas();
+				break;
+			case "Lista de Despesas":
+				listarDespesas();
 				break;
 			case "Deletar Despesas":
 				deletarDespesas();
@@ -373,8 +381,13 @@ public class Principal {
 		return subCategoria;
 	}
 	
+	private static void listarEstudantes() {
+		rep.listarEstudantes();
+	}
 	
-	
+	private static void listarDespesas() {
+		rep.listarDespesas();
+	}
 	
 	
 }
