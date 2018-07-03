@@ -116,7 +116,7 @@ public class Principal {
 			JOptionPane.showMessageDialog(null, "Despesa encontrada");
 			String aux;
 			if(d.getCategoria().getSubCategoria() != null)
-				aux = "SubCategoria = " + d.getCategoria().getSubCategoria().getDescricao() + "\n";
+				aux = "SubCategoria: " + d.getCategoria().getSubCategoria().getDescricao() + "\n";
 			else
 				aux = "";
 			JOptionPane.showMessageDialog(null, 
@@ -263,26 +263,70 @@ public class Principal {
 	
 	private static void cadastrarDespesa() {
 		do {
-			String descricao = JOptionPane.showInputDialog("Despesa");
+			String descricao = "";
+			descricao = JOptionPane.showInputDialog("Despesa");
+			Float valor = 0f;
+			
+			boolean resposta = true;
+			
+			do {
+				try {
+					valor = Float.parseFloat(JOptionPane.showInputDialog("Valor"));
+					resposta = false;
+				} catch (NumberFormatException e2) {
+					JOptionPane.showMessageDialog(null, e2.getMessage());
+					resposta = true;
+				}
+			}while(resposta);
+			
+			Categoria categoria = null;
 			
 			
-			Float valor = Float.parseFloat(JOptionPane.showInputDialog("Valor"));
-			
-			Categoria categoria = cadastrarCategoria();
-			
-			
+			do {
+				try {
+					categoria = cadastrarCategoria();
+					resposta = false;
+				} catch (CategoriaNaoInformadaException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					resposta = true;
+				}
+			} while(resposta);
 			Despesa des = new Despesa(descricao, categoria, valor);
 			
-			rep.cadastrarDespesa(des);
+			
+			do {
+				try {
+					rep.cadastrarDespesa(des);
+					resposta = false;
+				} catch (DescricaoNaoInformadaException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+					descricao = JOptionPane.showInputDialog("Despesa");
+					resposta = true;
+					des.setDescricao(descricao);
+				} catch (ValorNaoInformadoException | NumberFormatException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+					resposta = true;
+					try{
+						valor = Float.parseFloat(JOptionPane.showInputDialog("Valor"));
+					}catch(NumberFormatException e3) {
+						JOptionPane.showMessageDialog(null, "Erro: " + e3.getMessage());
+						resposta = true;
+					}
+					des.setValor(valor);
+					resposta = true;
+				}
+			} while(resposta);
 			
 		} while(JOptionPane.showConfirmDialog(null, "Deseja cadastrar uma nova despesa?") == JOptionPane.YES_OPTION);
 		
 	}
 
-	private static Categoria cadastrarCategoria() {
+	private static Categoria cadastrarCategoria() throws CategoriaNaoInformadaException{
 		Categoria categoria;
 
 		String descricao = JOptionPane.showInputDialog("Categoria");
+		if(descricao.equals("") || descricao.isEmpty())
+			throw new CategoriaNaoInformadaException();
 		
 		SubCategoria subCategoria = cadastrarSubCategoria();
 		

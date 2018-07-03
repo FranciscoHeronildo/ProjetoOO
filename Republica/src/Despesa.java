@@ -26,6 +26,18 @@ public class Despesa {
 		cat = new LinkedList<Categoria>();
 	}
 	
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public void setValor(float valor) {
+		this.valor = valor;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
 	public boolean cadastrarCategoria(Categoria c) {
 		boolean resposta = cat.add(c);
 		return resposta;

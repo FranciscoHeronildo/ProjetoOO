@@ -29,7 +29,13 @@ public class Republica {
 		return resposta;
 	}
 	
-	public boolean cadastrarDespesa(Despesa a) {
+	public boolean cadastrarDespesa(Despesa a) throws DescricaoNaoInformadaException, ValorNaoInformadoException{
+		
+		if(a.getDescricao().equals("") || a.getDescricao().isEmpty())
+			throw new DescricaoNaoInformadaException();
+		if(a.getValor() <= 0)
+			throw new ValorNaoInformadoException();
+		
 		boolean resposta = des.add(a);
 		return resposta;
 	}
