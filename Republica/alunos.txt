@@ -1,1 +1,2 @@
-Victor;manovictor5@gmail.com;1000000.0;
+victor;victor@mail.com;10000.0;
+chico;chico@mail.com;5000.0;

@@ -1,6 +1,21 @@
+
 import java.text.DecimalFormat;
 
 import javax.swing.JOptionPane;
+
+import Aplicação.Republica;
+import Cadastro.Categoria;
+import Cadastro.Despesa;
+import Cadastro.Estudante;
+import Cadastro.SubCategoria;
+import Calculo.RegraIgualitaria;
+import Calculo.RegraProporcional;
+import Exceptions.CategoriaNaoInformadaException;
+import Exceptions.DescricaoNaoInformadaException;
+import Exceptions.EmailNaoInformadoException;
+import Exceptions.NomeNaoInformadoException;
+import Exceptions.NumeroInvalidoException;
+import Exceptions.ValorNaoInformadoException;
 
 public class Principal {
 	static Republica rep = new Republica();
