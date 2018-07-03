@@ -1,4 +1,1 @@
-José;email;1000.0;
-João;email2;500.0;
-Pedro;Doguinho;600.0;
-Victor;manov;1500.0;
+Victor;manovictor5@gmail.com;1000000.0;

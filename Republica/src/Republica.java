@@ -19,12 +19,16 @@ public class Republica {
 		des = new LinkedList<Despesa>();
 	}
 	
-	public boolean cadastrarEstudante(Estudante a) throws NumberFormatException, NumeroInvalidoException {
+	public boolean cadastrarEstudante(Estudante a) throws NumberFormatException, NumeroInvalidoException, NomeNaoInformadoException, EmailNaoInformadoException {
 		boolean resposta = false;
 		
-		if(a.getRendimentos() <= 0) {
+		if(a.getRendimentos() <= 0)
 			throw new NumeroInvalidoException(a.getRendimentos());
-		}
+		if(a.getNome() == "" || a.getNome().isEmpty())
+			throw new NomeNaoInformadoException();
+		if(a.getEmail() == "" || a.getEmail().isEmpty())
+			throw new EmailNaoInformadoException();
+		
 		resposta = est.add(a);
 		return resposta;
 	}
@@ -148,7 +152,9 @@ public class Republica {
 			
 			float rendimento = Float.parseFloat(campos[2]);
 			
-			Estudante estudante = new Estudante(campos[0], campos[1], rendimento);
+			Estudante estudante = null;
+			estudante = new Estudante(campos[0], campos[1], rendimento);
+
 			
 			if (est == null) 
 				est = new LinkedList<Estudante>();

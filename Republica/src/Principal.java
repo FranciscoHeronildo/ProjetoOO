@@ -234,7 +234,9 @@ public class Principal {
 				}
 			} while(resposta);
 			
-			Estudante est = new Estudante(nome, email, rendimentos);
+			Estudante est = null;
+			est = new Estudante(nome, email, rendimentos);
+
 			
 			resposta = true;
 			do {
@@ -252,6 +254,16 @@ public class Principal {
 					}
 					est.setRendimentos(rendimentos);
 					resposta = true;
+				} catch (NomeNaoInformadoException e2) {
+					JOptionPane.showMessageDialog(null, "Erro: " + e2.getMessage());
+					nome = JOptionPane.showInputDialog("Nome do estudante:");
+					resposta = true;
+					est.setNome(nome);
+				} catch (EmailNaoInformadoException e3) {
+					JOptionPane.showMessageDialog(null, "Erro: " + e3.getMessage());
+					email = JOptionPane.showInputDialog("Email:");
+					resposta = true;
+					est.setEmail(email);
 				}
 			} while(resposta);
 
