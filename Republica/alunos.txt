@@ -1,2 +1,0 @@
-victor;victor@mail.com;10000.0;
-Heron;herozinho22;1005.99;
